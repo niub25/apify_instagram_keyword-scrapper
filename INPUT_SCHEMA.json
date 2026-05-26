@@ -1,0 +1,69 @@
+{
+  "title": "Instagram Username Extractor (Keyword Search)",
+  "description": "Extracts usernames from Instagram keyword search. Auto-discovers related keywords. Saves state so it survives server migrations.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "keywords": {
+      "title": "Seed keywords",
+      "type": "array",
+      "description": "Starting keywords, e.g. HOKA, Eliud Kipchoge, running shoes, marathon coach.",
+      "editor": "stringList",
+      "default": [
+        "hoka",
+        "eliud kipchoge",
+        "running shoes",
+        "marathon runner",
+        "trail running"
+      ],
+      "prefill": [
+        "hoka",
+        "eliud kipchoge",
+        "running shoes",
+        "marathon runner",
+        "trail running"
+      ]
+    },
+    "maxKeywords": {
+      "title": "Max total keywords",
+      "type": "integer",
+      "description": "Total keywords to process, including seed and auto-discovered related keywords.",
+      "minimum": 5,
+      "maximum": 3000,
+      "default": 500,
+      "prefill": 500
+    },
+    "maxPagesPerKeyword": {
+      "title": "Pages per keyword",
+      "type": "integer",
+      "description": "Instagram top search does not provide real pagination, so the actor stops after one useful page per keyword.",
+      "minimum": 1,
+      "maximum": 1000,
+      "default": 1,
+      "prefill": 1
+    },
+    "sessionId": {
+      "title": "Instagram Session ID",
+      "type": "string",
+      "description": "From Chrome Console: document.cookie.split(';').find(c=>c.trim().startsWith('sessionid')).split('=')[1]",
+      "editor": "textfield",
+      "isSecret": true
+    },
+    "csrfToken": {
+      "title": "Instagram CSRF Token",
+      "type": "string",
+      "description": "From Chrome Console: document.cookie.split(';').find(c=>c.trim().startsWith('csrftoken')).split('=')[1]",
+      "editor": "textfield",
+      "isSecret": true
+    },
+    "proxyConfiguration": {
+      "title": "Proxy configuration",
+      "type": "object",
+      "description": "Residential proxies are strongly recommended for Instagram scraping.",
+      "editor": "proxy",
+      "default": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] },
+      "prefill": { "useApifyProxy": true, "apifyProxyGroups": ["RESIDENTIAL"] }
+    }
+  },
+  "required": []
+}
